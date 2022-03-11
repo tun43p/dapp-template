@@ -1,0 +1,15 @@
+{
+  "env": { "browser": true, "es6": true, "node": true },
+  "plugins": ["react", "@typescript-eslint"],
+  "extends": [
+    "airbnb-typescript",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
+    "react-app"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "ecmaVersion": 12 }
+}
