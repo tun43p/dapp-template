@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { createContext, FC, ReactChild, useState } from "react";
+import { createContext, ReactChild, useState } from "react";
 import { CONTRACT_ADDRESS, PRIVATE_KEY } from "./constants";
 
 import artifact from "../artifacts/Greeter.json";
