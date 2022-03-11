@@ -21,6 +21,9 @@
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       { "allowExpressions": true, "allowTypedFunctionExpressions": true }
-    ]
+    ],
+    "rules": {
+      "node/no-unpublished-import": "error"
+    }
   }
 }

@@ -7,6 +7,8 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
+import env from "./utils/env";
+
 dotenv.config();
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -20,18 +22,17 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   solidity: "0.8.9",
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    [env.network]: {
+      url: env.uri.testnet,
+      accounts: env.key.private !== undefined ? [env.key.private] : [],
     },
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
+    enabled: env.debug.reportGas !== undefined,
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: env.key.etherscan,
   },
 };
 

@@ -1,6 +1,10 @@
 import { ethers } from "hardhat";
 
-async function main(): Promise<void> {
+import debug from "../utils/debug";
+
+async function deploy(): Promise<void> {
+  await debug();
+
   const Greeter = await ethers.getContractFactory("Greeter");
   const greeter = await Greeter.deploy("Hello, Hardhat!");
 
@@ -9,7 +13,7 @@ async function main(): Promise<void> {
   console.log("Greeter deployed to:", greeter.address);
 }
 
-main().catch((error) => {
+deploy().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
