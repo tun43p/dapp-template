@@ -1,0 +1,19 @@
+{
+  "bracketSpacing": true,
+  "explicitTypes": "always",
+  "printWidth": 80,
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "bracketSpacing": false,
+        "tabWidth": 4
+      }
+    }
+  ]
+}
