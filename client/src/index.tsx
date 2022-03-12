@@ -1,25 +1,26 @@
-import React, { useContext } from "react";
-import ReactDOM from "react-dom";
-import ConnectComponent from "./components/connect";
+import { StrictMode, useContext } from "react";
+import { render } from "react-dom";
+import HeaderComponent from "./components/header";
 import Provider, { ProviderContext } from "./utils/provider";
+import Style from "./utils/style";
 
 function App(): JSX.Element {
   const { account, contract } = useContext(ProviderContext);
 
   return (
     <div>
-      <h1>Dapp Template</h1>
-      <ConnectComponent />
+      <HeaderComponent />
       {account && contract && <p>Account and contract connected</p>}
     </div>
   );
 }
 
-ReactDOM.render(
-  <React.StrictMode>
+render(
+  <StrictMode>
+    <Style />
     <Provider>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("app"),
 );

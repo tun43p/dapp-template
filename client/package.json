@@ -1,6 +1,9 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "contract",
+  "version": "1.0.0",
+  "main": "package.json",
+  "author": "tun43p <dev@tun43p.com>",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": "~16.14.0"
