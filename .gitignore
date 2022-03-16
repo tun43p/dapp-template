@@ -1,6 +1,6 @@
+artifacts
 build
 cache
-contract/artifacts
 coverage*
 node_modules
 npm-debug.log*
