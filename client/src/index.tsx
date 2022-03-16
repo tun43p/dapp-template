@@ -1,26 +1,23 @@
-import { StrictMode, useContext } from "react";
+import { StrictMode } from "react";
 import { render } from "react-dom";
-import HeaderComponent from "./components/header";
-import Provider, { ProviderContext } from "./utils/provider";
-import Style from "./utils/style";
+
+import WalletProvider from "./providers/wallet";
+import GlobalStyle from "./utils/style";
 
 function App(): JSX.Element {
-  const { account, contract } = useContext(ProviderContext);
-
   return (
     <div>
-      <HeaderComponent />
-      {account && contract && <p>Account and contract connected</p>}
+      <h1>Dapp Template</h1>
     </div>
   );
 }
 
 render(
   <StrictMode>
-    <Style />
-    <Provider>
+    <GlobalStyle />
+    <WalletProvider>
       <App />
-    </Provider>
+    </WalletProvider>
   </StrictMode>,
   document.getElementById("app"),
 );

@@ -13,7 +13,7 @@ export const style = {
   },
 };
 
-const Style = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   *{
     margin: 0;
     padding: 0;
@@ -43,4 +43,4 @@ const Style = createGlobalStyle`
   }
 `;
 
-export default Style;
+export default GlobalStyle;
