@@ -5,14 +5,15 @@ import {
   useEffect,
   useState,
 } from "react";
+import config from "../utils/config";
 import ethereum, { EthereumMethods } from "../utils/ethereum";
 import status from "../utils/status";
 
-type WalletType = {
+export const WalletContext = createContext<{
+  connect: () => Promise<void>;
   wallet: string | null;
-};
-
-export const WalletContext = createContext<WalletType>({
+}>({
+  connect: async () => {},
   wallet: null,
 });
 
@@ -23,7 +24,7 @@ export default function WalletProvider({
 }): JSX.Element {
   const [wallet, setWallet] = useState<string | null>(null);
 
-  const verification = useCallback(async () => {
+  const verification = useCallback(async (): Promise<void> => {
     try {
       if (!ethereum) {
         status("error", "Please install MetaMask");
@@ -45,10 +46,11 @@ export default function WalletProvider({
         })
       ).toString();
 
-      const rinkebyChainId = "0x4";
-
-      if (chainId !== rinkebyChainId) {
-        status("error", "You're not connected to the Rinkeby Testnet");
+      if (chainId !== config.chain.rinkeby.id) {
+        status(
+          "error",
+          `You're not connected to the ${config.chain.rinkeby.name} Testnet`,
+        );
         return;
       }
 
@@ -66,8 +68,41 @@ export default function WalletProvider({
     verification().catch((error) => status("error", (error as Error).message));
   }, [verification]);
 
+  const connect = async (): Promise<void> => {
+    try {
+      if (!ethereum) {
+        status("error", "Please install MetaMask");
+        return;
+      }
+
+      const chainId = (
+        await ethereum.request({
+          method: EthereumMethods.ChainID,
+        })
+      ).toString();
+
+      if (chainId !== config.chain.rinkeby.id) {
+        status(
+          "error",
+          `You're not connected to the ${config.chain.rinkeby.name} Testnet`,
+        );
+        return;
+      }
+
+      const requestAccounts = await ethereum.request({
+        method: EthereumMethods.RequestAccounts,
+      });
+
+      setWallet(requestAccounts[0]);
+
+      status("success", `Connect with the account ${requestAccounts[0]}`);
+    } catch (error) {
+      status("error", `Error connecting wallet: ${(error as Error).message}`);
+    }
+  };
+
   return (
-    <WalletContext.Provider value={{ wallet }}>
+    <WalletContext.Provider value={{ connect, wallet }}>
       {children}
     </WalletContext.Provider>
   );
