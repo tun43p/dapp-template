@@ -1,0 +1,17 @@
+artifacts
+build
+cache
+coverage*
+node_modules
+npm-debug.log*
+typechain
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.env
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+.pnp
+.pnp.js
